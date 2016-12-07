@@ -16,6 +16,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>1.4.0.RELEASE</springboot.version>
+        <mavenplugin.version>2.4</mavenplugin.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +75,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${bootplugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -85,6 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>${mavenplugin.version}</version>
             </plugin>
         </plugins>
     </build>
