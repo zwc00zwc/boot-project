@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="application.mapper.MemberDao">
+    
+    <resultMap id="result" type="application.model.Member">
+        <id column="id" property="id" jdbcType="BIGINT" ></id>
+        <result column="phone" property="phone" jdbcType="VARCHAR"></result>
+        <result column="username" property="userName" jdbcType="VARCHAR"></result>
+        <result column="displayname" property="displayName" jdbcType="VARCHAR"></result>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"></result>
+        <result column="password" property="password" jdbcType="VARCHAR"></result>
+        <result column="address" property="address" jdbcType="VARCHAR"></result>
+        <result column="sex" property="sex" jdbcType="INTEGER"></result>
+        <result column="create_time" property="createTime" ></result>
+        <result column="update_time" property="updateTime" ></result>
+        <result column="remark" property="remark"></result>
+        <result column="status" property="status" jdbcType="INTEGER"></result>
+    </resultMap>
+
+    <select id="querylist" resultMap="result">
+        SELECT * FROM tb_member
+    </select>
+</mapper>
