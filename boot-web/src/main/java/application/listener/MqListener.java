@@ -1,18 +1,16 @@
-package application;
+package application.listener;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import rabbitmq.RabbitManager;
 
 import java.io.IOException;
 
 /**
- * Created by XR on 2016/12/6.
+ * Created by XR on 2016/12/9.
  */
-@SpringBootApplication
 public class MqListener {
-    public static void listen(){
+        public static void listen(){
         //区分不同工作进程的输出
         //int hashCode = Work.class.hashCode();
         //创建连接和频道

@@ -1,5 +1,6 @@
 package application;
 
+import application.service.MemberService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -22,7 +23,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("application.mapper")
+//@MapperScan("application.mapper")
 //@MapperScan("application.mapper")
 public class Application extends SpringBootServletInitializer {
 
@@ -40,7 +41,7 @@ public class Application extends SpringBootServletInitializer {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/mybatis/*.xml"));
 
         return sqlSessionFactoryBean.getObject();
     }
@@ -52,9 +53,5 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-//        IMember member=new MemberService();
-//        List<Member> list=member.queryList();
-//        System.out.print("List的个数"+list.size());
-//        MqListener.listen();
     }
 }

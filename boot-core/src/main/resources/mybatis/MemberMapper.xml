@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="application.mapper.MemberDao">
+<mapper namespace="core.domain.mapper.MemberMapper">
     
-    <resultMap id="result" type="application.Member">
+    <resultMap id="result" type="core.domain.model.Member">
         <id column="id" property="id" jdbcType="BIGINT" ></id>
         <result column="phone" property="phone" jdbcType="VARCHAR"></result>
         <result column="username" property="userName" jdbcType="VARCHAR"></result>
