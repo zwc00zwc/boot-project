@@ -18,7 +18,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>1.4.0.RELEASE</springboot.version>
-        <bootplugin.version>1.4.0.RELEASE</bootplugin.version>
     </properties>
 
     <dependencyManagement>
