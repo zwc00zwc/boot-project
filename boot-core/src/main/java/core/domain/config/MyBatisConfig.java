@@ -15,7 +15,8 @@ import javax.sql.DataSource;
 @Configuration
 public class MyBatisConfig {
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
+    //指定了数据连接配置文件，如果不配置则会到application.properties中读取
+    @ConfigurationProperties(prefix = "spring.datasource",locations = "classpath:/db.properties")
     public DataSource dataSource(){
         return new org.apache.tomcat.jdbc.pool.DataSource();
     }
