@@ -1,4 +1,4 @@
-package application;
+package application.controller;
 
 import application.model.Member;
 import application.service.MemberService;

@@ -23,8 +23,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-//@MapperScan("application.mapper")
-//@MapperScan("application.mapper")
+@MapperScan("application.mapper")
 public class Application extends SpringBootServletInitializer {
 
     @Bean

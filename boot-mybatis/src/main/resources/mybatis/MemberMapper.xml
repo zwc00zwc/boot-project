@@ -6,7 +6,7 @@
 
 <mapper namespace="application.mapper.MemberDao">
     
-    <resultMap id="result" type="application.Member">
+    <resultMap id="result" type="application.model.Member">
         <id column="id" property="id" jdbcType="BIGINT" ></id>
         <result column="phone" property="phone" jdbcType="VARCHAR"></result>
         <result column="username" property="userName" jdbcType="VARCHAR"></result>

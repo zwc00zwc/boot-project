@@ -12,7 +12,6 @@ import java.util.List;
  * Created by XR on 2016/12/7.
  */
 @Service
-@MapperScan("application.mapper")
 public class MemberService {
     @Autowired
     private MemberDao memberDao;
