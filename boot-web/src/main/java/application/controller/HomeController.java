@@ -11,6 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,5 +43,35 @@ public class HomeController {
         document.append("createtime",new Date());
         collection.insertOne(document);
         return "index";
+    }
+    @RequestMapping("/indexload")
+    String indexload(){
+        List<Member> memberList=new ArrayList<Member>();
+        try {
+            URL url1 = new URL("file:E:/boot-core-1.0-SNAPSHOT.jar");
+            URLClassLoader myClassLoader1 = new URLClassLoader(new URL[] { url1 }, null);
+            Thread.currentThread().setContextClassLoader(myClassLoader1);
+            Class<?> myClass1 = myClassLoader1.loadClass("core.domain.service.MemberService");
+//            MemberService memberService1=(MemberService)myClass1.newInstance();
+            Method mainMethod = myClass1.getMethod("queryList");
+            mainMethod.invoke(myClass1);
+//            memberService1.aaa();
+//            memberList=memberService1.queryList();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return "load"+memberList.size();
+    }
+
+    String indexjarload(){
+        return "loadjar";
     }
 }
