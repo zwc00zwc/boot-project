@@ -16,15 +16,15 @@ import org.springframework.context.annotation.ComponentScan;
  * Created by Administrator on 2016/12/12.
  */
 @SpringBootApplication
-@ComponentScan
+@ComponentScan(basePackages = "core.domain,application")
 public class Application {
-    private ZookeeperConfiguration zkConfig = new ZookeeperConfiguration("localhost:2181", "elastic-job-example", 1000, 3000, 3);
+    private ZookeeperConfiguration zkConfig = new ZookeeperConfiguration("localhost:2181", "zheng-job", 1000, 3000, 3);
 
     // 定义Zookeeper注册中心
     private CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(zkConfig);
 
     // 定义简单作业配置对象
-    private final SimpleJobConfiguration simpleJobConfig = JobConfigurationFactory.createSimpleJobConfigurationBuilder("simpleElasticDemoJob",
+    private final SimpleJobConfiguration simpleJobConfig = JobConfigurationFactory.createSimpleJobConfigurationBuilder("bootDemoJob",
             TestJob.class, 10, "0/5 * * * * ?").build();
 
     public static void main(String[] args){
