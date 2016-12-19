@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>boot-register</module>
+        <module>boot-cloud-client</module>
     </modules>
 
     <properties>
