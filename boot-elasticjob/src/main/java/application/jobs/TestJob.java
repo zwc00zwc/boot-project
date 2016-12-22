@@ -1,16 +1,15 @@
 package application.jobs;
 
-import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
-import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
+import com.dangdang.ddframe.job.api.ShardingContext;
+import com.dangdang.ddframe.job.api.simple.SimpleJob;
 
 import java.util.Date;
 
 /**
  * Created by XR on 2016/12/12.
  */
-public class TestJob extends AbstractSimpleElasticJob {
-    @Override
-    public void process(JobExecutionMultipleShardingContext jobExecutionMultipleShardingContext) {
+public class TestJob implements SimpleJob {
+    public void execute(ShardingContext shardingContext) {
         try {
             Thread.sleep(1000);
             System.out.print("TestJob"+new Date().toString());
