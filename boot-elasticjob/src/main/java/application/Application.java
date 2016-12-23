@@ -1,6 +1,7 @@
 package application;
 
 import application.jobs.DataJob;
+import application.jobs.MyJobDemo;
 import application.jobs.TestJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
 import com.dangdang.ddframe.job.config.JobRootConfiguration;
@@ -11,6 +12,13 @@ import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import common.Job1;
+import common.job.JobScheduleController;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.simpl.SimpleJobFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,10 +32,11 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
     public static void main(String[] args){
         SpringApplication.run(Application.class);
-        new Application().init();
+        init();
+        init1();
     }
 
-    private void init() {
+    private static void init() {
         // 定义作业核心配置
         JobCoreConfiguration simpleCoreConfig = JobCoreConfiguration.newBuilder("TestJob", "0/1 * * * * ?", 10).build();
         // 定义SIMPLE类型配置
@@ -46,5 +55,22 @@ public class Application {
         regCenter.init();
         new JobScheduler(regCenter,simpleJobRootConfig).init();
         new JobScheduler(regCenter,dataflowJobRootConfig).init();
+    }
+
+    /**
+     * zheng job
+     */
+    private static void init1(){
+        JobDetail jobDetail = JobBuilder.newJob(MyJobDemo.class).withIdentity("MyJobDemo").build();
+        Scheduler scheduler=null;
+        try {
+            StdSchedulerFactory factory = new StdSchedulerFactory();
+            factory.initialize();
+            scheduler = factory.getScheduler();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        JobScheduleController jobScheduleController=new JobScheduleController(scheduler,jobDetail,"t1");
+        jobScheduleController.scheduleJob("0/5 * * * * ?");
     }
 }
