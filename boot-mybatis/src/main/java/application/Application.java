@@ -50,6 +50,11 @@ public class Application extends SpringBootServletInitializer {
         return new DataSourceTransactionManager(dataSource());
     }
 
+    @Override
+    protected org.springframework.boot.builder.SpringApplicationBuilder configure(org.springframework.boot.builder.SpringApplicationBuilder builder) {
+        return builder.sources(Application.class);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

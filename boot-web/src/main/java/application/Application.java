@@ -13,13 +13,7 @@ import java.util.Date;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "core.domain,application")
-public class Application extends SpringBootServletInitializer {
-
-    @Override
-    protected org.springframework.boot.builder.SpringApplicationBuilder configure(org.springframework.boot.builder.SpringApplicationBuilder builder) {
-        return builder.sources(Application.class);
-    }
-
+public class Application {
     public static void main(String[] args){
         SpringApplication springApplication= new SpringApplication(Application.class);
         springApplication.run(args);
