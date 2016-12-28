@@ -1,6 +1,7 @@
 package application.config;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
+import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
@@ -17,6 +18,7 @@ public class RedisConfig {
     // 代表连接port
     private int port;
 
+    @DisconfFileItem(name = "redis.host", associateField = "host")
     public String getHost() {
         return host;
     }
@@ -25,6 +27,7 @@ public class RedisConfig {
         this.host = host;
     }
 
+    @DisconfFileItem(name = "redis.port", associateField = "port")
     public int getPort() {
         return port;
     }

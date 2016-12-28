@@ -25,6 +25,7 @@
             <list>
                 <!--<value>mongo.properties</value>-->
                 <value>classpath*:redis.properties</value>
+                <value>classpath*:db.properties</value>
             </list>
         </property>
     </bean>
@@ -48,8 +49,8 @@
         <!--<property name="mongo_password" value="${mongo_password}" />-->
     <!--</bean>-->
 
-    <bean id="redisConfig" class="application.config.RedisConfig">
-        <property name="host" value="${redis.host}" />
-        <property name="port" value="${redis.port}" />
-    </bean>
+    <!--<bean id="redisConfig" class="application.config.RedisConfig">-->
+        <!--<property name="host" value="${redis.host}" />-->
+        <!--<property name="port" value="${redis.port}" />-->
+    <!--</bean>-->
 </beans>

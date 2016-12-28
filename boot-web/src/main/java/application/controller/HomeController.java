@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.config.RedisConfig;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import core.domain.model.Member;
@@ -28,6 +29,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private RedisConfig redisConfig;
     @RequestMapping("/")
     String home() {
         List<Member> list= memberService.queryList();
