@@ -142,13 +142,6 @@
                 <artifactId>sharding-jdbc-core</artifactId>
                 <version>${sharding.version}</version>
             </dependency>
-
-            <!-- https://mvnrepository.com/artifact/com.baidu.disconf/disconf-client -->
-            <dependency>
-                <groupId>com.baidu.disconf</groupId>
-                <artifactId>disconf-client</artifactId>
-                <version>${disconf.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

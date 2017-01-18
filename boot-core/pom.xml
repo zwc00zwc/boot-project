@@ -45,10 +45,5 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!-- mybatis end-->
-
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-client</artifactId>
-        </dependency>
     </dependencies>
 </project>
