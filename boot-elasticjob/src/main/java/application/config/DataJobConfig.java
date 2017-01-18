@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 
 /**
+ * elastic配置启动类，注入spring
  * Created by alan.zheng on 2016/12/23.
  */
 @Configuration

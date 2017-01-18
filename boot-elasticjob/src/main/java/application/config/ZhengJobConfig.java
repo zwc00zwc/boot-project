@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 造轮子的任务配置类，注入spring启动
  * Created by alan.zheng on 2017/1/18.
  */
 @Configuration
