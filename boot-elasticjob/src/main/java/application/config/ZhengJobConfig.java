@@ -2,7 +2,6 @@ package application.config;
 
 import application.jobs.ZhengJob;
 import common.job.*;
-import jobtest.TestJob;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
