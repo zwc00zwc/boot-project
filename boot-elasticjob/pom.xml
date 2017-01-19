@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <groupId>zheng</groupId>
-            <artifactId>zheng-common</artifactId>
+            <artifactId>zheng-job-core</artifactId>
         </dependency>
 
         <!-- 使用springframework自定义命名空间时引入 -->

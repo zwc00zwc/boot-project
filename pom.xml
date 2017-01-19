@@ -28,7 +28,7 @@
         <dependencies>
             <dependency>
                 <groupId>zheng</groupId>
-                <artifactId>zheng-common</artifactId>
+                <artifactId>zheng-job-core</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
