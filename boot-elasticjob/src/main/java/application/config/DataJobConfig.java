@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * elastic配置启动类，注入spring
  * Created by alan.zheng on 2016/12/23.
  */
-@Configuration
+//@Configuration
 public class DataJobConfig {
 //    @Bean
 //    public ZookeeperRegistryCenter zookeeperRegistryCenter(){

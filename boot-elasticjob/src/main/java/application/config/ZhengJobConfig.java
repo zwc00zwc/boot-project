@@ -2,8 +2,11 @@ package application.config;
 
 import application.jobs.ZhengJob;
 import common.job.*;
+import common.reg.zookeeper.ZookeeperRegistryCenter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
 
 /**
  * 造轮子的任务配置类，注入spring启动
@@ -16,9 +19,12 @@ public class ZhengJobConfig {
         return new ZhengJob();
     }
 
+    @Resource
+    public ZookeeperRegistryCenter registryCenter;
+
     @Bean(initMethod = "init")
     public JobScheduler dataflowJobScheduler(final SimpleJob simpleJob) {
         JobConfig jobConfig=new JobConfig("zhengJob", simpleJob.getClass().getCanonicalName(),"0/5 * * * * ?");
-        return new SpringJobScheduler(jobConfig,simpleJob);
+        return new SpringJobScheduler(jobConfig,registryCenter,simpleJob);
     }
 }

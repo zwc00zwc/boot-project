@@ -1,6 +1,7 @@
 regCenter:
   serverList: localhost:2181
   namespace: elastic-job-lite-springboot
+  auth: auth
 
 jobEventConfig:
   url: jdbc:h2:mem:job_event_storage

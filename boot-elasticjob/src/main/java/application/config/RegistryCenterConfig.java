@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by alan.zheng on 2016/12/23.
  */
-@Configuration
+//@Configuration
 @ConditionalOnExpression("'${regCenter.serverList}'.length() > 0")
 public class RegistryCenterConfig {
     @Bean(initMethod = "init")
