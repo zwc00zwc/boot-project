@@ -1,10 +1,10 @@
 package application.config;
 
 import application.jobs.ZhengJob;
-import job.JobConfig;
 import job.JobScheduler;
 import job.SimpleJob;
 import job.SpringJobScheduler;
+import job.config.JobConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reg.zookeeper.ZookeeperRegistryCenter;
