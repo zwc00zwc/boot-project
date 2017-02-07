@@ -1,5 +1,6 @@
 package application.jobs;
 
+import common.utility.DateUtility;
 import core.domain.service.MemberService;
 import job.SimpleJob;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,6 @@ public class ZhengJob implements SimpleJob {
     private MemberService memberService;
 
     public void execute() {
-        System.out.print("我在测试ZhengJob"+new Date().toString());
+        System.out.print("我在测试ZhengJob"+DateUtility.getStrFromDate(new Date(),""));
     }
 }

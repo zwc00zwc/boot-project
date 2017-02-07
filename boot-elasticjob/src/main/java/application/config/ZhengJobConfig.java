@@ -27,7 +27,7 @@ public class ZhengJobConfig {
 
     @Bean(initMethod = "init")
     public JobScheduler dataflowJobScheduler(final SimpleJob simpleJob) {
-        JobConfig jobConfig=new JobConfig("zhengJob", simpleJob.getClass().getCanonicalName(),"0/5 * * * * ?");
+        JobConfig jobConfig=new JobConfig("zhengJob", simpleJob.getClass().getCanonicalName(),"0/20 * * * * ?");
         return new SpringJobScheduler(jobConfig,registryCenter,simpleJob);
     }
 }
