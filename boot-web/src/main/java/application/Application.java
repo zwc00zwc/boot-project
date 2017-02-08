@@ -14,12 +14,12 @@ import java.util.Date;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "core.domain,application")
-@ImportResource({"classpath:disconf.xml"})//引入disconf
+//@ImportResource({"classpath:disconf.xml"})//引入disconf
 public class Application {
     public static void main(String[] args){
         SpringApplication springApplication= new SpringApplication(Application.class);
         springApplication.run(args);
         System.out.print(new Date().toString());
-        MqListener.listen();
+//        MqListener.listen();
     }
 }
