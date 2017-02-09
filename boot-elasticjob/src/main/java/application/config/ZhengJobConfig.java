@@ -17,17 +17,17 @@ import javax.annotation.Resource;
  */
 @Configuration
 public class ZhengJobConfig {
-    @Bean
-    public ZhengJob dataJob() {
+    @Bean(name = "zhengJob")
+    public ZhengJob zhengJob() {
         return new ZhengJob();
     }
 
     @Resource
     public ZookeeperRegistryCenter registryCenter;
 
-    @Bean(initMethod = "init")
-    public JobScheduler dataflowJobScheduler(final BaseJob baseJob) {
-        JobConfig jobConfig=new JobConfig("zhengJob", baseJob.getClass().getCanonicalName());
-        return new SpringJobScheduler(jobConfig,registryCenter,baseJob);
+    @Bean(initMethod = "init",name = "zhengJobSpringJobScheduler")
+    public JobScheduler dataflowJobScheduler(final BaseJob zhengJob) {
+        JobConfig jobConfig=new JobConfig("zhengJob", zhengJob.getClass().getCanonicalName());
+        return new SpringJobScheduler(jobConfig,registryCenter,zhengJob);
     }
 }
