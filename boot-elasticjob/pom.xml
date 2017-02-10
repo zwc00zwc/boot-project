@@ -63,6 +63,10 @@
             <groupId>zheng</groupId>
             <artifactId>zheng-job-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>zheng</groupId>
+            <artifactId>zheng-mq-core</artifactId>
+        </dependency>
 
         <!-- 使用springframework自定义命名空间时引入 -->
         <!--<dependency>-->
