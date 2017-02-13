@@ -3,10 +3,13 @@ package application.config.mq;
 import businessmq.ConsumerListener;
 import businessmq.SpringConsumerListener;
 import businessmq.config.ConsumerConfig;
+import businessmq.reg.zookeeper.ZookeeperRegistryCenter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import javax.annotation.Resource;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -23,6 +26,9 @@ public class TestMqConfig {
         return new ThreadPoolTaskExecutor();
     }
 
+    @Resource
+    private ZookeeperRegistryCenter mqzookeeperRegistryCenter;
+
     @Bean(name = "testConsumer")
     public TestConsumer zhengJob() {
         return new TestConsumer();
@@ -37,6 +43,6 @@ public class TestMqConfig {
         consumerConfig.setPassword("guest");
         consumerConfig.setConsumerQueue("command");
         consumerConfig.setJavaClass(testConsumer.getClass().getCanonicalName());
-        return new SpringConsumerListener(consumerConfig,testConsumer,threadPoolTaskExecutor);
+        return new SpringConsumerListener(consumerConfig,mqzookeeperRegistryCenter,testConsumer,threadPoolTaskExecutor);
     }
 }

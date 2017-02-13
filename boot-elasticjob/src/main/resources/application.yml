@@ -7,6 +7,11 @@ zhengregCenter:
   namespace: root
   auth: auth
 
+zhengmqregCenter:
+  serverList: localhost:2181
+  namespace: businessmq
+  auth: auth
+
 jobEventConfig:
   url: jdbc:h2:mem:job_event_storage
   driverClassName: org.h2.Driver

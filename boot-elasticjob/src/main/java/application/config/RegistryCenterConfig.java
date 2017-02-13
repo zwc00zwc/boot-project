@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by alan.zheng on 2016/12/23.
  */
-//@Configuration
+@Configuration
 @ConditionalOnExpression("'${regCenter.serverList}'.length() > 0")
 public class RegistryCenterConfig {
-    @Bean(initMethod = "init")
+    @Bean(initMethod = "init",name = "zookeeperRegistryCenter")
     public ZookeeperRegistryCenter regCenter(@Value("${regCenter.serverList}") final String serverList, @Value("${regCenter.namespace}") final String namespace) {
         return new ZookeeperRegistryCenter(new ZookeeperConfiguration(serverList, namespace));
     }

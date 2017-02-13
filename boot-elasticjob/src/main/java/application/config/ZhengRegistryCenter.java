@@ -11,7 +11,7 @@ import reg.zookeeper.ZookeeperRegistryCenter;
  */
 @Configuration
 public class ZhengRegistryCenter {
-    @Bean(initMethod = "init")
+    @Bean(initMethod = "init",name = "jobZookeeperRegistryCenter")
     public ZookeeperRegistryCenter regCenter(@Value("${zhengregCenter.serverList}") final String serverList, @Value("${zhengregCenter.namespace}") final String namespace, @Value("${zhengregCenter.auth}") final String auth) {
         ZookeeperConfig zookeeperConfig=new ZookeeperConfig();
         zookeeperConfig.setServerLists(serverList);

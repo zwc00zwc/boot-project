@@ -22,11 +22,11 @@ public class SecondJobConfig {
     }
 
     @Resource
-    public ZookeeperRegistryCenter registryCenter;
+    public ZookeeperRegistryCenter jobZookeeperRegistryCenter;
 
     @Bean(initMethod = "init",name = "SecondJobSpringJobScheduler" )
     public JobScheduler dataflowJobScheduler(final BaseJob secondJob) {
         JobConfig jobConfig=new JobConfig("SecondJob", secondJob.getClass().getCanonicalName());
-        return new SpringJobScheduler(jobConfig,registryCenter,secondJob);
+        return new SpringJobScheduler(jobConfig,jobZookeeperRegistryCenter,secondJob);
     }
 }

@@ -22,14 +22,14 @@ import javax.annotation.Resource;
  * elastic配置启动类，注入spring
  * Created by alan.zheng on 2016/12/23.
  */
-//@Configuration
+@Configuration
 public class DataJobConfig {
 //    @Bean
 //    public ZookeeperRegistryCenter zookeeperRegistryCenter(){
 //        return new ZookeeperRegistryCenter(new ZookeeperConfiguration("localhost:2181", "bootjob"));
 //    }
     @Resource
-    private ZookeeperRegistryCenter regCenter;
+    private ZookeeperRegistryCenter zookeeperRegistryCenter;
 
 //    @Resource
 //    private JobEventConfiguration jobEventConfiguration;
@@ -45,7 +45,7 @@ public class DataJobConfig {
     @Bean(initMethod = "init")
     public JobScheduler dataflowJobScheduler(final DataflowJob dataflowJob, @Value("${simpleJob.cron}") final String cron, @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
                                              @Value("${simpleJob.shardingItemParameters}") final String shardingItemParameters) {
-        return new SpringJobScheduler(dataflowJob, regCenter, getLiteJobConfiguration(dataflowJob.getClass(), cron, shardingTotalCount, shardingItemParameters));
+        return new SpringJobScheduler(dataflowJob, zookeeperRegistryCenter, getLiteJobConfiguration(dataflowJob.getClass(), cron, shardingTotalCount, shardingItemParameters));
     }
 
     private LiteJobConfiguration getLiteJobConfiguration(final Class<? extends DataflowJob> jobClass, final String cron, final int shardingTotalCount, final String shardingItemParameters) {
