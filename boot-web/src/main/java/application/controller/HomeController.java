@@ -1,5 +1,6 @@
 package application.controller;
 
+import businessmq.SpringProductProvide;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import core.domain.model.Member;
@@ -28,6 +29,8 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private SpringProductProvide springProductProvide;
     @RequestMapping("/")
     String home() {
         List<Member> list= memberService.queryList();
@@ -73,5 +76,11 @@ public class HomeController {
 
     String indexjarload(){
         return "loadjar";
+    }
+
+    @RequestMapping(value = "send")
+    public String send(){
+        springProductProvide.send("aaa");
+        return "send";
     }
 }

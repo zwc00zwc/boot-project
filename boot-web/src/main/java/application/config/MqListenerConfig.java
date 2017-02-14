@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by alan.zheng on 2017/2/8.
  */
-@Configuration
+//@Configuration
 public class MqListenerConfig {
     @Bean(initMethod = "listen")
     public MqListener dataflowJobScheduler() {
