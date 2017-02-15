@@ -3,6 +3,7 @@ package application.config.mq;
 import businessmq.ConsumerListener;
 import businessmq.SpringConsumerListener;
 import businessmq.config.ConsumerConfig;
+import businessmq.db.DbConfig;
 import businessmq.reg.zookeeper.ZookeeperRegistryCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,11 @@ public class TestMqConfig {
         consumerConfig.setPassword("guest");
         consumerConfig.setConsumerQueue("command");
         consumerConfig.setJavaClass(testConsumer.getClass().getCanonicalName());
-        return new SpringConsumerListener(consumerConfig,mqzookeeperRegistryCenter,testConsumer,threadPoolTaskExecutor);
+        DbConfig dbConfig=new DbConfig();
+        dbConfig.setDriver("com.mysql.jdbc.Driver");
+        dbConfig.setUrl("jdbc:mysql://localhost:3306/com.zwc?useUnicode=true&amp;characterEncoding=UTF-8");
+        dbConfig.setUsername("root");
+        dbConfig.setPassword("root");
+        return new SpringConsumerListener(consumerConfig,dbConfig,mqzookeeperRegistryCenter,testConsumer,threadPoolTaskExecutor);
     }
 }
