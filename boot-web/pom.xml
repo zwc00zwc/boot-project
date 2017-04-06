@@ -56,7 +56,7 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
-            <groupId>zheng</groupId>
+            <groupId>zheng-businessmq</groupId>
             <artifactId>zheng-businessmq-core</artifactId>
         </dependency>
     </dependencies>

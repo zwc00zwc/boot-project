@@ -60,11 +60,11 @@
             <artifactId>elastic-job-lite-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>zheng</groupId>
+            <groupId>zheng-job</groupId>
             <artifactId>zheng-job-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>zheng</groupId>
+            <groupId>zheng-businessmq</groupId>
             <artifactId>zheng-businessmq-core</artifactId>
         </dependency>
 
