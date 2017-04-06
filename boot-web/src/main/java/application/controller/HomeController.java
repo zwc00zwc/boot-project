@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.annotation.Auth;
 import businessmq.SpringProductProvide;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -31,6 +32,7 @@ public class HomeController {
     private MemberService memberService;
     @Autowired
     private SpringProductProvide springProductProvide;
+    @Auth(rule = "")
     @RequestMapping("/")
     String home() {
         List<Member> list= memberService.queryList();
