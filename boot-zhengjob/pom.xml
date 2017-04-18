@@ -47,18 +47,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.dangdang</groupId>-->
-            <!--<artifactId>elastic-job-core</artifactId>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.dangdang</groupId>
-            <artifactId>elastic-job-lite-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dangdang</groupId>
-            <artifactId>elastic-job-lite-spring</artifactId>
-        </dependency>
         <dependency>
             <groupId>zheng-job</groupId>
             <artifactId>zheng-job-core</artifactId>
@@ -67,12 +55,6 @@
             <groupId>zheng-businessmq</groupId>
             <artifactId>zheng-businessmq-core</artifactId>
         </dependency>
-
-        <!-- 使用springframework自定义命名空间时引入 -->
-        <!--<dependency>-->
-            <!--<groupId>com.dangdang</groupId>-->
-            <!--<artifactId>elastic-job-spring</artifactId>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
