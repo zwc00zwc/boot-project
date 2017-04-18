@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>1.4.0.RELEASE</springboot.version>
-        <elastic.version>2.0.3</elastic.version>
+        <elastic.version>2.1.0</elastic.version>
         <sharding.version>1.4.0</sharding.version>
         <disconf.version>2.6.36</disconf.version>
     </properties>
