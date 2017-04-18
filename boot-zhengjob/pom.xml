@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>boot-elasticjob</artifactId>
+    <artifactId>boot-zhengjob</artifactId>
     <packaging>jar</packaging>
 
     <name>boot-elasticjob</name>

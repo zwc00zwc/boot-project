@@ -13,7 +13,7 @@
         <module>boot-common</module>
         <module>boot-web</module>
         <module>boot-mybatis</module>
-        <module>boot-elasticjob</module>
+        <module>boot-zhengjob</module>
     </modules>
 
     <properties>
