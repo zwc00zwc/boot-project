@@ -1,5 +1,5 @@
 regCenter:
-  serverList: localhost:2181
+  serverList: 192.168.48.129:2181
   namespace: elastic-job-lite-springboot
 
 jobEventConfig:
@@ -11,4 +11,9 @@ jobEventConfig:
 simpleJob:
   cron: 0/5 * * * * ?
   shardingTotalCount: 1
+  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+
+dataflowJob:
+  cron: 0/20 * * * * ?
+  shardingTotalCount: 2
   shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
