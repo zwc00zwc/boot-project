@@ -10,7 +10,7 @@
     <artifactId>boot-zhengjob</artifactId>
     <packaging>jar</packaging>
 
-    <name>boot-elasticjob</name>
+    <name>boot-zhengjob</name>
     <url>http://maven.apache.org</url>
 
     <properties>

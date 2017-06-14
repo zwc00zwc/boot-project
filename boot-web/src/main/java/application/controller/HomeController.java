@@ -8,6 +8,8 @@ import core.domain.model.Member;
 import core.domain.service.MemberService;
 import mongodb.MongodbManager;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +30,16 @@ import java.util.List;
 @RestController
 @SpringBootApplication
 public class HomeController {
+    private static Logger logger= LoggerFactory.getLogger(HomeController.class);
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private SpringProductProvide springProductProvide;
+//    @Autowired
+//    private SpringProductProvide springProductProvide;
     @Auth(rule = "")
     @RequestMapping("/")
     String home() {
         List<Member> list= memberService.queryList();
+        logger.info("这是一条log,访问hello world");
         return "Hello World! "+list.size()+"";
     }
     @RequestMapping("/index")
@@ -82,7 +86,7 @@ public class HomeController {
 
     @RequestMapping(value = "send")
     public String send(){
-        springProductProvide.send("aaa");
+//        springProductProvide.send("aaa");
         return "send";
     }
 }

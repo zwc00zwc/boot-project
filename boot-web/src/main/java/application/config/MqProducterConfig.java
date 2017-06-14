@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by alan.zheng on 2017/2/14.
  */
-@Configuration
+//@Configuration
 public class MqProducterConfig {
     @Bean
     public ProducterProvider producterProvider(){

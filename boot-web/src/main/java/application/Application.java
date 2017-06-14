@@ -3,6 +3,8 @@ package application;
 import application.listener.MqListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
@@ -15,11 +17,15 @@ import java.util.Date;
 @SpringBootApplication
 @ComponentScan(basePackages = "core.domain,application")
 //@ImportResource({"classpath:disconf.xml"})//引入disconf
-public class Application {
+public class Application implements EmbeddedServletContainerCustomizer {
     public static void main(String[] args){
         SpringApplication springApplication= new SpringApplication(Application.class);
         springApplication.run(args);
         System.out.print(new Date().toString());
 //        MqListener.listen();
+    }
+
+    public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
+        configurableEmbeddedServletContainer.setPort(8086);
     }
 }
