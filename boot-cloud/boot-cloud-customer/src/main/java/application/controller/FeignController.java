@@ -15,6 +15,11 @@ public class FeignController {
 
     @RequestMapping("/index")
     public String index(){
-        return feignServiceClient.index();
+        try {
+            return feignServiceClient.index();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "失败了";
     }
 }
