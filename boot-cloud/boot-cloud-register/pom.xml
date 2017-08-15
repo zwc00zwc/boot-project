@@ -46,6 +46,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
@@ -80,6 +85,32 @@
             </plugin>
         </plugins>
     </build>
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--&lt;!&ndash; master注册中心 &ndash;&gt;-->
+            <!--<id>master</id>-->
+            <!--<properties>-->
+                <!--<profiles.active>master</profiles.active>-->
+            <!--</properties>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--&lt;!&ndash; slaveA注册中心 &ndash;&gt;-->
+            <!--<id>slaveA</id>-->
+            <!--<properties>-->
+                <!--<profiles.active>slaveA</profiles.active>-->
+            <!--</properties>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--&lt;!&ndash; slaveB注册中心 &ndash;&gt;-->
+            <!--<id>slaveB</id>-->
+            <!--<properties>-->
+                <!--<profiles.active>slaveB</profiles.active>-->
+            <!--</properties>-->
+        <!--</profile>-->
+    <!--</profiles>-->
     <!--<build>-->
         <!--<plugins>-->
             <!--&lt;!&ndash; compiler &ndash;&gt;-->

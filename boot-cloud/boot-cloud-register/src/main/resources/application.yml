@@ -1,12 +1,64 @@
-server:
-#  服务端口
-  port: 1111
+# 默认的profile为slaveA，其他环境通过指定启动参数使用不同的profile，比如：
+#   slaveB：java -jar my-spring-boot.jar --spring.profiles.active=slaveB
+spring:
+  profiles:
+    active: slaveA
+    server:
+      #节点A端口
+      slaveA:
+        port: 1111
+      #节点B端口
+      slaveB:
+        port: 1112
+      #节点C端口
+      slaveC:
+        port: 1113
 
+---
+spring:
+  profiles: slaveA
+
+server:
+    #服务端口
+    port: ${spring.profiles.server.slaveA.port}
 eureka:
   instance:
-    hostname: localhost
+    hostname: eurekaserver1
   client:
-    register-with-eureka: false   #是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
     fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://${eureka.instance.hostname}:${server.master.port}/eureka/,http://${eureka.instance.hostname}:${server.slaveA.port}/eureka/
+      defaultZone: http://eurekaserver1:1111/eureka/
+
+---
+spring:
+  profiles: slaveB
+server:
+  #服务端口
+  port: ${spring.profiles.server.slaveB.port}
+eureka:
+  instance:
+    hostname: eurekaserver1
+  client:
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
+    fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
+    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.master.port}/eureka/,http://${eureka.instance.hostname}:${server.slaveA.port}/eureka/
+      defaultZone: http://eurekaserver1:1112/eureka/
+
+---
+spring:
+  profiles: slaveC
+server:
+  #服务端口
+  port: ${spring.profiles.server.slaveC.port}
+eureka:
+  instance:
+    hostname: eurekaserver1
+  client:
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
+    fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
+    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.master.port}/eureka/,http://${eureka.instance.hostname}:${server.slaveA.port}/eureka/
+      defaultZone: http://eurekaserver1:1111/eureka/
