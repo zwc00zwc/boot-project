@@ -1,11 +1,12 @@
 server:
+#  服务端口
   port: 1111
 
 eureka:
   instance:
     hostname: localhost
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: false   #是否将eureka自身作为应用注册到eureka注册中心
+    fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
