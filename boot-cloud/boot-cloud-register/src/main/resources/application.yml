@@ -17,6 +17,9 @@ spring:
         hostname: eurekaserver3
         port: 1113
 
+  application:
+        name: eureka-server
+
 ---
 spring:
   profiles: slaveA
@@ -26,12 +29,13 @@ server:
     port: ${spring.profiles.server.slaveA.port}
 eureka:
   instance:
-    hostname: eurekaserver1
+    hostname: ${spring.profiles.server.slaveA.hostname}
   client:
-    register-with-eureka: false   #是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
     fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
     serviceUrl:
       defaultZone: http://${spring.profiles.server.slaveB.hostname}:${spring.profiles.server.slaveB.port}/eureka/,http://${spring.profiles.server.slaveC.hostname}:${spring.profiles.server.slaveC.port}/eureka/
+#      defaultZone: http://${spring.profiles.server.slaveB.hostname}:${spring.profiles.server.slaveB.port}/eureka/
 
 ---
 spring:
@@ -41,13 +45,13 @@ server:
   port: ${spring.profiles.server.slaveB.port}
 eureka:
   instance:
-    hostname: ${spring.profiles.server.slaveB.port}
+    hostname: ${spring.profiles.server.slaveB.hostname}
   client:
-    register-with-eureka: false   #是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
     fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
     serviceUrl:
       defaultZone: http://${spring.profiles.server.slaveA.hostname}:${spring.profiles.server.slaveA.port}/eureka/,http://${spring.profiles.server.slaveC.hostname}:${spring.profiles.server.slaveC.port}/eureka/
-
+#      defaultZone: http://${spring.profiles.server.slaveA.hostname}:${spring.profiles.server.slaveA.port}/eureka/
 
 ---
 spring:
@@ -57,9 +61,9 @@ server:
   port: ${spring.profiles.server.slaveC.port}
 eureka:
   instance:
-    hostname: ${spring.profiles.server.slaveC.port}
+    hostname: ${spring.profiles.server.slaveC.hostname}
   client:
-    register-with-eureka: false   #是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true   #是否将eureka自身作为应用注册到eureka注册中心
     fetch-registry: false   #为true时，可以启动，但报异常：Cannot execute request on any known server
     serviceUrl:
       defaultZone: http://${spring.profiles.server.slaveA.hostname}:${spring.profiles.server.slaveA.port}/eureka/,http://${spring.profiles.server.slaveB.hostname}:${spring.profiles.server.slaveB.port}/eureka/
