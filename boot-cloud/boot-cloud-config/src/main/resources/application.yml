@@ -1,0 +1,12 @@
+server:
+  port: 8888
+
+
+spring:
+  profiles:
+    active: subversion
+  cloud:
+    config:
+      server:
+        svn:
+          uri:
