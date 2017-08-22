@@ -18,8 +18,8 @@ public class FeignController {
         try {
             return feignServiceClient.index();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.print(e.toString());
+            return "失败了";
         }
-        return "失败了";
     }
 }
