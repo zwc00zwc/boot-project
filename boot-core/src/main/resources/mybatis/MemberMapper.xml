@@ -24,4 +24,20 @@
     <select id="querylist" resultMap="result">
         SELECT * FROM tb_member
     </select>
+
+    <select id="queryByIdForLock" resultMap="result">
+        SELECT * FROM tb_member WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <update id="updateById">
+        UPDATE tb_member SET username = #{member.userName},sex = #{member.sex} WHERE id = #{member.id}
+    </update>
+
+    <update id="updateByIdError">
+        UPDATE tb_member SET username = #{member.userName},sex = aaa WHERE id = #{member.id}
+    </update>
+
+    <insert id="insert">
+        INSERT INTO tb_member (username) VALUES (#{member.userName})
+    </insert>
 </mapper>

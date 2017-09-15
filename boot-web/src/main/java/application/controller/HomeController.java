@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.annotation.Auth;
+import application.service.TestService;
 import businessmq.SpringProductProvide;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -33,6 +34,8 @@ public class HomeController {
     private static Logger logger= LoggerFactory.getLogger(HomeController.class);
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private TestService testService;
 //    @Autowired
 //    private SpringProductProvide springProductProvide;
     @Auth(rule = "")
@@ -42,6 +45,21 @@ public class HomeController {
         logger.info("这是一条log,访问hello world");
         return "Hello World! "+list.size()+"";
     }
+
+    @RequestMapping("/test")
+    String test(String name){
+//        try {
+//            memberService.test(8L,name);
+//            System.out.print("aaa");
+//        } catch (Exception e) {
+//            System.out.print("报错了");
+//        }
+//        System.out.print("test");
+//        return "aa";
+        testService.a();
+        return "aaa";
+    }
+
     @RequestMapping("/index")
     String index(){
         MongodbManager.getAuthDatabase();

@@ -8,5 +8,9 @@ import java.util.List;
  * Created by XR on 2016/12/9.
  */
 public interface IMember {
-    public List<Member> queryList();
+    List<Member> queryList();
+
+    void test(Long id, String name);
+
+    Member update(Long id,String name);
 }
