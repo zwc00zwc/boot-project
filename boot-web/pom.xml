@@ -67,10 +67,20 @@
             <groupId>zheng-businessmq</groupId>
             <artifactId>zheng-businessmq-core</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.mangofactory</groupId>-->
-            <!--<artifactId>swagger-springmvc</artifactId>-->
-        <!--</dependency>-->
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <!-- log4j end-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
