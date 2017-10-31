@@ -1,5 +1,6 @@
 package core.domain.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.Date;
@@ -8,17 +9,29 @@ import java.util.Date;
  * Created by Administrator on 2016/8/21.
  */
 public class Member {
+    @ApiModelProperty(value = "id")
     private Long id;
+    @ApiModelProperty(value = "手机")
     private String phone;
+    @ApiModelProperty(value = "用户名")
     private String userName;
+    @ApiModelProperty(value = "用户显示名")
     private String displayName;
+    @ApiModelProperty(value = "头像地址")
     private String imgUrl;
+    @ApiModelProperty(value = "密码")
     private String password;
+    @ApiModelProperty(value = "用户地址")
     private String address;
+    @ApiModelProperty(value = "性别")
     private Short sex;
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
+    @ApiModelProperty(value = "备注")
     private String remark;
+    @ApiModelProperty(value = "状态")
     private Short status;
 
     public Long getId() {

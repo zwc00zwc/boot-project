@@ -67,6 +67,19 @@
             <groupId>zheng-businessmq</groupId>
             <artifactId>zheng-businessmq-core</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.mangofactory</groupId>-->
+            <!--<artifactId>swagger-springmvc</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

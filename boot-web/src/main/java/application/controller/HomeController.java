@@ -7,6 +7,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import core.domain.model.Member;
 import core.domain.service.MemberService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import mongodb.MongodbManager;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
@@ -30,6 +33,8 @@ import java.util.List;
  */
 @RestController
 @SpringBootApplication
+@RequestMapping(value = "/home")
+@Api(description = "HomeController相关操作接口")
 public class HomeController {
     private static Logger logger= LoggerFactory.getLogger(HomeController.class);
     @Autowired
@@ -39,14 +44,17 @@ public class HomeController {
 //    @Autowired
 //    private SpringProductProvide springProductProvide;
     @Auth(rule = "")
-    @RequestMapping("/")
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @ApiOperation(value="home接口", notes="jsdfkasjdfs")
     String home() {
         List<Member> list= memberService.queryList();
         logger.info("这是一条log,访问hello world");
         return "Hello World! "+list.size()+"";
     }
 
-    @RequestMapping("/test")
+
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @ApiOperation(value="test接口", notes="事件发生货到付款静安寺")
     String test(String name){
 //        try {
 //            memberService.test(8L,name);
@@ -60,7 +68,8 @@ public class HomeController {
         return "aaa";
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @ApiOperation(value="index接口", notes="事件发生货到付款静安寺")
     String index(){
         MongodbManager.getAuthDatabase();
         MongoDatabase database=MongodbManager.getAuthDatabase();
@@ -71,7 +80,8 @@ public class HomeController {
         collection.insertOne(document);
         return "index";
     }
-    @RequestMapping("/indexload")
+    @RequestMapping(value = "/indexload",method = RequestMethod.GET)
+    @ApiOperation(value="indexload接口", notes="事件发生货到付款静安寺")
     String indexload(){
         List<Member> memberList=new ArrayList<Member>();
         try {
@@ -102,7 +112,8 @@ public class HomeController {
         return "loadjar";
     }
 
-    @RequestMapping(value = "send")
+    @RequestMapping(value = "send",method = RequestMethod.GET)
+    @ApiOperation(value="send接口", notes="事件发生货到付款静安寺")
     public String send(){
 //        springProductProvide.send("aaa");
         return "send";
