@@ -1,22 +1,22 @@
+server:
+  port: 8081
 regCenter:
-  serverList: 192.168.48.129:2181
-  namespace: elastic-job-lite-springboot
+  serverList: 192.168.48.129:2181,192.168.48.131:2181,192.168.48.132:2181
+  namespace: boot-elasticjob
 
-jobEventConfig:
-  url: jdbc:h2:mem:job_event_storage
-  driverClassName: org.h2.Driver
-  username: sa
-  password:
+#jobEventConfig:
+#  url: jdbc:h2:mem:job_event_storage
+#  driverClassName: org.h2.Driver
+#  username: sa
+#  password:
 
 simpleJob:
-  cron: 0/5 * * * * ?
+  cron: 0/10 * * * * ?
   shardingTotalCount: 1
-  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
 
 dataflowJob:
   cron: 0/20 * * * * ?
   shardingTotalCount: 2
-  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
 
 spring:
   datasource:
