@@ -22,13 +22,13 @@ public class TestJobConfig {
     @Resource
     private ZookeeperRegistryCenter zookeeperRegistryCenter;
 
-    @Bean
+    @Bean(name = "testJob")
     public SimpleJob simpleJob() {
         return new TestJob();
     }
 
-    @Bean(initMethod = "init")
-    public JobScheduler simpleJobScheduler(final SimpleJob simpleJob, @Value("${simpleJob.cron}") final String cron, @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount) {
+    @Bean(name = "testJobScheduler", initMethod = "init")
+    public JobScheduler testJobScheduler(final SimpleJob simpleJob, @Value("${simpleJob.cron}") final String cron, @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount) {
         return new SpringJobScheduler(simpleJob, zookeeperRegistryCenter, getLiteJobConfiguration(simpleJob.getClass(), cron, shardingTotalCount));
     }
 

@@ -26,13 +26,13 @@ public class DataTestJobConfig {
     @Resource
     private JobEventConfiguration jobEventConfiguration;
 
-    @Bean
-    public DataflowJob dataflowJob() {
+    @Bean(name = "dataTestJob" )
+    public DataflowJob dataTestJob() {
         return new DataTestJob();
     }
 
-    @Bean(initMethod = "init")
-    public JobScheduler dataflowJobScheduler(final DataflowJob dataflowJob, @Value("${dataflowJob.cron}") final String cron, @Value("${dataflowJob.shardingTotalCount}") final int shardingTotalCount,
+    @Bean(name = "dataTestJobScheduler", initMethod = "init")
+    public JobScheduler dataTestJobScheduler(final DataflowJob dataflowJob, @Value("${dataflowJob.cron}") final String cron, @Value("${dataflowJob.shardingTotalCount}") final int shardingTotalCount,
                                              @Value("${dataflowJob.shardingItemParameters}") final String shardingItemParameters) {
         return new SpringJobScheduler(dataflowJob, zookeeperRegistryCenter, getLiteJobConfiguration(dataflowJob.getClass(), cron, shardingTotalCount, shardingItemParameters),jobEventConfiguration);
     }

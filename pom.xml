@@ -23,6 +23,7 @@
         <springboot.version>1.4.0.RELEASE</springboot.version>
         <elastic.version>2.1.5</elastic.version>
         <sharding.version>1.4.0</sharding.version>
+        <jackson.version>2.8.0</jackson.version>
         <disconf.version>2.6.36</disconf.version>
     </properties>
 
@@ -119,6 +120,45 @@
                 <version>1.2.2</version>
             </dependency>
             <!-- mybatis end-->
+
+            <!-- json -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>2.4</version>
+                <classifier>jdk15</classifier>
+            </dependency>
+            <!-- json end-->
 
             <!-- mysql数据驱动 -->
             <dependency>
