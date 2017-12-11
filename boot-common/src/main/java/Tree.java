@@ -83,6 +83,15 @@ public class Tree {
         printVal(root.getRight());
     }
 
+    int maxDeath(TreeNode node){
+        if(node==null){
+            return 0;
+        }
+        int left = maxDeath(node.getLeft());
+        int right = maxDeath(node.getRight());
+        return Math.max(left,right) + 1;
+    }
+
 }
 
 class TreeNode{
