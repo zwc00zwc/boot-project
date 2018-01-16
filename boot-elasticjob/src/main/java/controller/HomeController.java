@@ -1,7 +1,9 @@
 package controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import jobs.common.HttpRequestClient;
+import jobs.common.WeiXinClient;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sign.RSA;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +24,9 @@ import java.util.Map;
 public class HomeController {
     @Autowired
     private HttpRequestClient httpRequestClient;
+
+    @Autowired
+    private WeiXinClient weiXinClient;
 
     @Resource
     private ThreadPoolTaskExecutor taskExecutor;
@@ -119,6 +125,23 @@ public class HomeController {
     public String index3(){
         String resultStr = httpRequestClient.doGet("https://www.yrw.com/products/queryTransferProjectList?currentPage=1&pageSize=8&orderSource=rateDesc");
         JSONObject jsonObject = JSONObject.parseObject(resultStr);
+        JSONObject ar = null;
+        jsonObject.get("success");
+        System.out.print("a："+jsonObject.get("success"));
+        BigDecimal baseRate = new BigDecimal("15.9");
+        if ((Boolean) jsonObject.get("success")){
+            JSONArray jsonArray = (JSONArray) jsonObject.get("resultList");
+            for (int i = 0;i<jsonArray.size();i++){
+                ar = (JSONObject) jsonArray.get(i);
+                ar.get("minAnnualizedRate");
+                BigDecimal rate = new BigDecimal(ar.get("minAnnualizedRate")+"");
+                BigDecimal availableBalance = new BigDecimal(ar.get("availableBalance")+"");
+
+                if (baseRate.compareTo(rate)<0){
+                    weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
+                }
+            }
+        }
         return "index3";
     }
 }
