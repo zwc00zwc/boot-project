@@ -128,7 +128,7 @@ public class HomeController {
         JSONObject ar = null;
         jsonObject.get("success");
         System.out.print("a："+jsonObject.get("success"));
-        BigDecimal baseRate = new BigDecimal("15.9");
+        BigDecimal baseRate = new BigDecimal("40");
         if ((Boolean) jsonObject.get("success")){
             JSONArray jsonArray = (JSONArray) jsonObject.get("resultList");
             for (int i = 0;i<jsonArray.size();i++){

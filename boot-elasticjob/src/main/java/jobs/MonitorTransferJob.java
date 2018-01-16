@@ -25,19 +25,20 @@ public class MonitorTransferJob implements SimpleJob {
 
     public void execute(ShardingContext shardingContext) {
         try {
+            logger.info("开始监控高收益转让项目");
             String resultStr = httpRequestClient.doGet("https://www.yrw.com/products/queryTransferProjectList?currentPage=1&pageSize=8&orderSource=rateDesc");
             JSONObject jsonObject = JSONObject.parseObject(resultStr);
             JSONObject ar = null;
-            jsonObject.get("success");
-            System.out.print("a："+jsonObject.get("success"));
-            BigDecimal baseRate = new BigDecimal("15.9");
+            BigDecimal rate = null;
+            BigDecimal availableBalance = null;
+            BigDecimal baseRate = new BigDecimal("40");
             if ((Boolean) jsonObject.get("success")){
                 JSONArray jsonArray = (JSONArray) jsonObject.get("resultList");
                 for (int i = 0;i<jsonArray.size();i++){
                     ar = (JSONObject) jsonArray.get(i);
                     ar.get("minAnnualizedRate");
-                    BigDecimal rate = new BigDecimal(ar.get("minAnnualizedRate")+"");
-                    BigDecimal availableBalance = new BigDecimal(ar.get("availableBalance")+"");
+                    rate = new BigDecimal(ar.get("minAnnualizedRate")+"");
+                    availableBalance = new BigDecimal(ar.get("availableBalance")+"");
                     if (baseRate.compareTo(rate)<0){
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
                     }
