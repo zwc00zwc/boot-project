@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 /**
  * Created by alan.zheng on 2017/11/20.
  */
-@Configuration
+//@Configuration
 public class SignJobConfig {
     @Resource
     private ZookeeperRegistryCenter zookeeperRegistryCenter;

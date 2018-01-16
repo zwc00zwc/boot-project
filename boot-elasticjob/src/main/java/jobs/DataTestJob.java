@@ -16,14 +16,14 @@ import java.util.List;
  */
 public class DataTestJob implements DataflowJob {
     private static Logger logger = LoggerFactory.getLogger(TestJob.class);
-    @Autowired
-    private MemberService memberService;
+//    @Autowired
+//    private MemberService memberService;
     //分割数据
     public List fetchData(ShardingContext shardingContext) {
-        switch (shardingContext.getShardingItem()){
-            case 0 : return null;
-            case 1 : return memberService.queryList();
-        }
+//        switch (shardingContext.getShardingItem()){
+//            case 0 : return null;
+//            case 1 : return memberService.queryList();
+//        }
         return null;
     }
     //处理数据

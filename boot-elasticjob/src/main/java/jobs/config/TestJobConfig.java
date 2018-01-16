@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 /**
  * Created by alan.zheng on 2017/4/18.
  */
-@Configuration
+//@Configuration
 public class TestJobConfig {
     @Resource
     private ZookeeperRegistryCenter zookeeperRegistryCenter;

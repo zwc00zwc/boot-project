@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 /**
  * Created by alan.zheng on 2017/5/10.
  */
-@Configuration
+//@Configuration
 public class JobEventConfig {
     @Resource
     private DataSource dataSource;

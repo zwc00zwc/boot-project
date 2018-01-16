@@ -178,7 +178,7 @@
             <dependency>
                 <groupId>com.dangdang</groupId>
                 <artifactId>elastic-job-lite-core</artifactId>
-                <version>${elastic.version}</version>
+                <version>2.1.4.1</version>
             </dependency>
             <dependency>
                 <groupId>com.dangdang</groupId>
