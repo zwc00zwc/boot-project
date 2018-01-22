@@ -67,7 +67,7 @@ public class SignJob implements SimpleJob {
     }
 
     private void sign(Map map){
-        String result = httpRequestClient.doPost("https://api.yrw.com/security/member/goSignIn",map);
+        String result = httpRequestClient.doPost("https://api.yrw.com/security/member/goSignIn",map,"1.0.0");
     }
 
     private String getToken(String username,String password){
@@ -77,7 +77,7 @@ public class SignJob implements SimpleJob {
         map.put("loginSource","2");
         map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
         map.put("equipment","iPhone");
-        String response = httpRequestClient.doPost("https://api.yrw.com/logining",map);
+        String response = httpRequestClient.doPost("https://api.yrw.com/logining",map,"1.0.0");
         JSONObject jsonObject = JSONObject.parseObject(response);
         JSONObject o = (JSONObject)jsonObject.get("result");
         return o.get("token").toString();

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import jobs.common.HttpRequestClient;
 import jobs.common.WeiXinClient;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +70,7 @@ public class HomeController {
                     map.put("loginSource",2);
                     map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
                     map.put("token",token);
-                    String result = httpRequestClient.doPost("https://api.yrw.com/security/find/dynamicInvoke?invokeMethod=3",map);
+                    String result = httpRequestClient.doPost("https://api.yrw.com/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
                 }
             });
         }
@@ -101,7 +102,7 @@ public class HomeController {
             e.printStackTrace();
         }
         map.put("uid",uidStr);
-        String result = httpRequestClient.doPost("http://localhost:8085/openService/aaa",map);
+        String result = httpRequestClient.doPost("http://localhost:8085/openService/aaa",map,"1.0.0");
         return result;
     }
 
@@ -114,7 +115,7 @@ public class HomeController {
         map.put("loginSource","2");
         map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
         map.put("equipment","iPhone");
-        String response = httpRequestClient.doPost("https://api.yrw.com/logining",map);
+        String response = httpRequestClient.doPost("https://api.yrw.com/logining",map,"1.0.0");
         //String response = httpRequestClient.doPost("http://192.168.0.51:8082/logining",map);
         JSONObject jsonObject = JSONObject.parseObject(response);
         JSONObject o = (JSONObject)jsonObject.get("result");
@@ -123,7 +124,7 @@ public class HomeController {
 
     @RequestMapping(value = "index3")
     public String index3(){
-        String resultStr = httpRequestClient.doGet("https://www.yrw.com/products/queryTransferProjectList?currentPage=1&pageSize=8&orderSource=rateDesc");
+        String resultStr = httpRequestClient.doGet("http://192.168.0.51:8080/products/queryTransferProjectList?currentPage=1&pageSize=8&orderSource=rateDesc");
         JSONObject jsonObject = JSONObject.parseObject(resultStr);
         JSONObject ar = null;
         jsonObject.get("success");
@@ -136,12 +137,74 @@ public class HomeController {
                 ar.get("minAnnualizedRate");
                 BigDecimal rate = new BigDecimal(ar.get("minAnnualizedRate")+"");
                 BigDecimal availableBalance = new BigDecimal(ar.get("availableBalance")+"");
+                if (i==1){
+//                        if (baseRate.compareTo(rate)<0){
+//                        weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
+                        //自动投资
+                        Map<String,Object> postMap = new HashMap<String, Object>();
+//                        String token = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==");
+                        String token = "/0+tUQVzMpv1Pvp7CYcpASx80A/pzuz8wT6i25Iw0nn71U5OR8sv4Kmc2xFnjtwK3Vow2gw0b0v9bHvxF4+aaA==";
+                        String thumbnail = ar.get("thumbnail")+"";
+                        if (StringUtils.isNotEmpty(thumbnail)){
+                            String[] args = thumbnail.split("/");
+                            String projectid = args[args.length - 1];
+                            postMap.put("projectId",projectid.substring(0,9));
+                        }
+                        BigDecimal invest = availableBalance.multiply(new BigDecimal("0.6"));
+                        int a = invest.intValue()/1000 + 1;
+                        int b = a*1000;
+                        BigDecimal totalInvest = new BigDecimal(b);
+                        postMap.put("transferId",ar.get("id"));
+                        postMap.put("projectCategory","2");
+                        postMap.put("transferPrincipal",totalInvest);
+                        //postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                        postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                        postMap.put("token",token);
+                        String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/order/createOrder",postMap,"1.7.0");
+                        System.out.print(result);
+                    //支付
+                    JSONObject resultJson = JSONObject.parseObject(result);
+                    if ((Boolean) resultJson.get("success")){
+                        JSONObject orderResult = (JSONObject) resultJson.get("result");
+                        Map<String,Object> payMap = new HashMap<String, Object>();
+                        payMap.put("orderNo",orderResult.get("orderNo"));
+                        payMap.put("usedCapital",orderResult.get("investAmount"));
+                        payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                        payMap.put("token",token);
+                        String payResult = httpRequestClient.doPost("http://192.168.0.51:8082/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
+                        System.out.print(payResult);
+                    }
 
-                if (baseRate.compareTo(rate)<0){
-                    weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
+//                    }
                 }
+
             }
         }
         return "index3";
+    }
+
+    private String getToken(String username,String password){
+        Map map = new HashMap();
+        map.put("username",username);
+        map.put("password",password);
+        map.put("loginSource","2");
+        map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+        map.put("equipment","iPhone");
+        String response = httpRequestClient.doPost("http://192.168.0.51:8082/logining",map,"1.0.0");
+        JSONObject jsonObject = JSONObject.parseObject(response);
+        JSONObject o = (JSONObject)jsonObject.get("result");
+        return o.get("token").toString();
+    }
+
+    @RequestMapping(value = "index4")
+    public String index4(){
+        String token = "/0+tUQVzMpv1Pvp7CYcpASx80A/pzuz8wT6i25Iw0nn71U5OR8sv4Kmc2xFnjtwK3Vow2gw0b0v9bHvxF4+aaA==";
+        Map<String,Object> payMap = new HashMap<String, Object>();
+        payMap.put("orderNo","YRTC20180122141853593003126");
+        payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+        payMap.put("token",token);
+        String payResult = httpRequestClient.doPost("http://192.168.0.51:8082/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
+        System.out.print(payResult);
+        return "index4";
     }
 }

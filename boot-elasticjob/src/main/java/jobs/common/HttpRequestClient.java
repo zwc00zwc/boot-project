@@ -1,5 +1,6 @@
 package jobs.common;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -122,7 +123,7 @@ public class HttpRequestClient {
         return null;
     }
 
-    public String doPost(String url, Map<String, Object> params) {
+    public String doPost(String url, Map<String, Object> params, String version) {
         List<NameValuePair> pairs = null;
         if (params != null && !params.isEmpty()) {
             pairs = new ArrayList<NameValuePair>(params.size());
@@ -140,7 +141,9 @@ public class HttpRequestClient {
                 e.printStackTrace();
             }
         }
-        httpPost.setHeader("Accept-Version","1.0.0");
+        if (StringUtils.isNotEmpty(version)){
+            httpPost.setHeader("Accept-Version",version);
+        }
         CloseableHttpResponse responseBody = null;
         String response = null;
         try {
