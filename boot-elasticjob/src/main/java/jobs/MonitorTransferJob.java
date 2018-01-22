@@ -10,7 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +27,9 @@ public class MonitorTransferJob implements SimpleJob {
 
     @Autowired
     private WeiXinClient weiXinClient;
+
+    @Resource
+    private ThreadPoolTaskExecutor taskExecutor;
 
     public void execute(ShardingContext shardingContext) {
         try {
@@ -46,41 +51,9 @@ public class MonitorTransferJob implements SimpleJob {
                         //通知
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
                         //自动投资
-                        try {
-                            Map<String,Object> postMap = new HashMap<String, Object>();
-                            String token = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==");
-                            String thumbnail = ar.get("thumbnail")+"";
-                            if (StringUtils.isNotEmpty(thumbnail)){
-                                String[] args = thumbnail.split("/");
-                                String projectid = args[args.length - 1];
-                                postMap.put("projectId",projectid.substring(0,9));
-                            }
-                            BigDecimal invest = availableBalance.multiply(new BigDecimal("0.6"));
-                            int a = invest.intValue()/1000 + 1;
-                            int b = a*1000;
-                            BigDecimal totalInvest = new BigDecimal(b);
-                            postMap.put("transferId",ar.get("id"));
-                            postMap.put("projectCategory","2");
-                            postMap.put("transferPrincipal",totalInvest);
-                            postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
-                            postMap.put("token",token);
-                            String result = httpRequestClient.doPost("https://api.yrw.com/security/order/createOrder",postMap,"1.7.0");
-                            System.out.print(result);
-                            //支付
-                            JSONObject resultJson = JSONObject.parseObject(result);
-                            if ((Boolean) resultJson.get("success")){
-                                JSONObject orderResult = (JSONObject) resultJson.get("result");
-                                Map<String,Object> payMap = new HashMap<String, Object>();
-                                payMap.put("orderNo",orderResult.get("orderNo"));
-                                payMap.put("usedCapital",orderResult.get("investAmount"));
-                                payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
-                                payMap.put("token",token);
-                                String payResult = httpRequestClient.doPost("https://api.yrw.com/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
-                                System.out.print(payResult);
-                            }
-                        } catch (Exception e) {
-                            logger.error("自动投资异常",e);
-                        }
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+                        Thread.sleep(500);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ=="));
                     }
                 }
             }
@@ -100,5 +73,56 @@ public class MonitorTransferJob implements SimpleJob {
         JSONObject jsonObject = JSONObject.parseObject(response);
         JSONObject o = (JSONObject)jsonObject.get("result");
         return o.get("token").toString();
+    }
+
+    private class TransactionThread implements Runnable{
+        private JSONObject ar;
+        private BigDecimal availableBalance;
+        private String userName;
+        private String password;
+        public TransactionThread(JSONObject _ar,BigDecimal _availableBalance,String _userName,String _password){
+            ar = _ar;
+            availableBalance = _availableBalance;
+            userName = _userName;
+            password = _password;
+        }
+        public void run() {
+            //自动投资
+            try {
+                Map<String,Object> postMap = new HashMap<String, Object>();
+                String token = getToken(userName,password);
+                String thumbnail = ar.get("thumbnail")+"";
+                if (StringUtils.isNotEmpty(thumbnail)){
+                    String[] args = thumbnail.split("/");
+                    String projectid = args[args.length - 1];
+                    postMap.put("projectId",projectid.substring(0,9));
+                }
+                BigDecimal invest = availableBalance.multiply(new BigDecimal("0.6"));
+                int a = invest.intValue()/1000 + 1;
+                int b = a*1000;
+                BigDecimal totalInvest = new BigDecimal(b);
+                postMap.put("transferId",ar.get("id"));
+                postMap.put("projectCategory","2");
+                postMap.put("transferPrincipal",totalInvest);
+                postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                postMap.put("token",token);
+                String result = httpRequestClient.doPost("https://api.yrw.com/security/order/createOrder",postMap,"1.7.0");
+                System.out.print(result);
+                //支付
+                JSONObject resultJson = JSONObject.parseObject(result);
+                if ((Boolean) resultJson.get("success")){
+                    JSONObject orderResult = (JSONObject) resultJson.get("result");
+                    Map<String,Object> payMap = new HashMap<String, Object>();
+                    payMap.put("orderNo",orderResult.get("orderNo"));
+                    payMap.put("usedCapital",orderResult.get("investAmount"));
+                    payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                    payMap.put("token",token);
+                    String payResult = httpRequestClient.doPost("https://api.yrw.com/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
+                    System.out.print(payResult);
+                }
+            } catch (Exception e) {
+                logger.error("自动投资异常",e);
+            }
+        }
     }
 }
