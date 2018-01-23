@@ -97,16 +97,27 @@ public class MonitorTransferJob implements SimpleJob {
                     String projectid = args[args.length - 1];
                     postMap.put("projectId",projectid.substring(0,9));
                 }
-                BigDecimal invest = availableBalance.multiply(new BigDecimal("0.6"));
-                int a = invest.intValue()/1000 + 1;
-                int b = a*1000;
-                BigDecimal totalInvest = new BigDecimal(b);
+                //计算账户余额
+                BigDecimal payBalance = null;
+                BigDecimal totalInvest = null;
+                for (int i = 9;i > 1;i--){
+                    double ratio = i*0.1;
+                    payBalance = payBalance(ratio);
+                    if (payBalance.compareTo(new BigDecimal(10000))<=0){
+                        BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
+                        int a = invest.intValue()/1000 + 1;
+                        int b = a*1000;
+                        totalInvest = new BigDecimal(b);
+                        break;
+                    }
+                }
                 postMap.put("transferId",ar.get("id"));
                 postMap.put("projectCategory","2");
                 postMap.put("transferPrincipal",totalInvest);
                 postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
                 postMap.put("token",token);
                 String result = httpRequestClient.doPost("https://api.yrw.com/security/order/createOrder",postMap,"1.7.0");
+                logger.info("创建订单返回结果:",result);
                 System.out.print(result);
                 //支付
                 JSONObject resultJson = JSONObject.parseObject(result);
@@ -118,11 +129,51 @@ public class MonitorTransferJob implements SimpleJob {
                     payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
                     payMap.put("token",token);
                     String payResult = httpRequestClient.doPost("https://api.yrw.com/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
+                    logger.info("支付订单返回结果:",result);
                     System.out.print(payResult);
                 }
             } catch (Exception e) {
                 logger.error("自动投资异常",e);
             }
         }
+
+        private BigDecimal payBalance(double ratio){
+            BigDecimal discount = null;
+            Map<String,Object> detailMap = new HashMap<String, Object>();
+            String thumbnail = ar.get("thumbnail")+"";
+            if (StringUtils.isNotEmpty(thumbnail)){
+                String[] args = thumbnail.split("/");
+                String projectid = args[args.length - 1];
+                detailMap.put("pid",projectid.substring(0,9));
+            }
+            detailMap.put("transferId",ar.get("id"));
+            detailMap.put("projectCategory",2);
+            String detailResult = httpRequestClient.doPost("https://api.yrw.com/project/queryProjectInterestById",detailMap,"1.0.0");
+            JSONObject detailJson = JSONObject.parseObject(detailResult);
+            if ((Boolean) detailJson.get("success")){
+                JSONObject detailResultJson = (JSONObject) detailJson.get("result");
+                if (StringUtils.isNotEmpty(detailResultJson.get("discount")+"")){
+                    discount = new BigDecimal(detailResultJson.get("discount")+"");
+                }
+            }
+            BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
+            int a = invest.intValue()/1000 + 1;
+            int b = a*1000;
+            BigDecimal totalInvest = new BigDecimal(b);
+            BigDecimal totalAmount = new BigDecimal(ar.get("totalAmount")+"");
+            BigDecimal investDiscount = totalInvest.divide(totalAmount,2,BigDecimal.ROUND_HALF_UP).multiply(discount).setScale(2,BigDecimal.ROUND_HALF_UP);
+
+            BigDecimal payBalance = invest.subtract(investDiscount);
+            return payBalance;
+        }
     }
+
+//    public static void main(String[] args){
+//        BigDecimal totalInvest =new BigDecimal(11000);
+//        BigDecimal totalAmount = new BigDecimal("13000.00");
+//        BigDecimal discount = new BigDecimal("30.00");
+//        BigDecimal investDiscount = totalInvest.divide(totalAmount,2,BigDecimal.ROUND_HALF_UP);
+////                .multiply(discount).setScale(2);
+//        System.out.print(investDiscount);
+//    }
 }
