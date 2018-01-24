@@ -51,9 +51,9 @@ public class MonitorTransferJob implements SimpleJob {
                         //通知
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
                         //自动投资
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
-                        Thread.sleep(500);
                         taskExecutor.execute(new TransactionThread(ar,availableBalance,"oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ=="));
+                        Thread.sleep(1000);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class MonitorTransferJob implements SimpleJob {
                 for (int i = 9;i > 1;i--){
                     double ratio = i*0.1;
                     payBalance = payBalance(ratio);
-                    if (payBalance.compareTo(new BigDecimal(10000))<=0){
+                    if (payBalance.compareTo(new BigDecimal(10001))<=0){
                         BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
                         int a = invest.intValue()/1000 + 1;
                         int b = a*1000;
@@ -154,6 +154,9 @@ public class MonitorTransferJob implements SimpleJob {
                 JSONObject detailResultJson = (JSONObject) detailJson.get("result");
                 if (StringUtils.isNotEmpty(detailResultJson.get("discount")+"")){
                     discount = new BigDecimal(detailResultJson.get("discount")+"");
+                }
+                if (StringUtils.isNotEmpty(detailResultJson.get("availableBalance")+"")){
+                    availableBalance = new BigDecimal(detailResultJson.get("availableBalance")+"");
                 }
             }
             BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
