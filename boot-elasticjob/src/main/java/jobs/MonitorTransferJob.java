@@ -52,8 +52,15 @@ public class MonitorTransferJob implements SimpleJob {
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
                         //自动投资
                         taskExecutor.execute(new TransactionThread(ar,availableBalance,"oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ=="));
-                        Thread.sleep(1000);
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+                        Thread.sleep(500);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"uCKSt/gCxvHr9wFa5zr4fA==","Jemr+UzSmwwpfD0MrTY9BQ=="));
+                        Thread.sleep(500);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"xnHhsi+JeHazpo33o1H8qQ==","Jemr+UzSmwwpfD0MrTY9BQ=="));
+                        Thread.sleep(500);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"41fSk/7Qd8D+z53vl18MQw==","sd0yJ/19TPQzlApYQVgXyA=="));
+                        Thread.sleep(500);
+                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"fKWOXFwl+TcqqvRo+4I0Tg==","sd0yJ/19TPQzlApYQVgXyA=="));
+                        //taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
                     }
                 }
             }
@@ -67,7 +74,7 @@ public class MonitorTransferJob implements SimpleJob {
         map.put("username",username);
         map.put("password",password);
         map.put("loginSource","2");
-        map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+        map.put("device","2c0ba9de351a329b58f4867b73133c611cf1a7cf");
         map.put("equipment","iPhone");
         String response = httpRequestClient.doPost("https://api.yrw.com/logining",map,"1.0.0");
         JSONObject jsonObject = JSONObject.parseObject(response);
@@ -103,7 +110,7 @@ public class MonitorTransferJob implements SimpleJob {
                 for (int i = 9;i > 1;i--){
                     double ratio = i*0.1;
                     payBalance = payBalance(ratio);
-                    if (payBalance.compareTo(new BigDecimal(10001))<=0){
+                    if (payBalance.compareTo(new BigDecimal(2000))<=0){
                         BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
                         int a = invest.intValue()/1000 + 1;
                         int b = a*1000;
@@ -114,7 +121,7 @@ public class MonitorTransferJob implements SimpleJob {
                 postMap.put("transferId",ar.get("id"));
                 postMap.put("projectCategory","2");
                 postMap.put("transferPrincipal",totalInvest);
-                postMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                postMap.put("device","2c0ba9de351a329b58f4867b73133c611cf1a7cf");
                 postMap.put("token",token);
                 String result = httpRequestClient.doPost("https://api.yrw.com/security/order/createOrder",postMap,"1.7.0");
                 logger.info("创建订单返回结果:",result);
@@ -126,7 +133,7 @@ public class MonitorTransferJob implements SimpleJob {
                     Map<String,Object> payMap = new HashMap<String, Object>();
                     payMap.put("orderNo",orderResult.get("orderNo"));
                     payMap.put("usedCapital",orderResult.get("investAmount"));
-                    payMap.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+                    payMap.put("device","2c0ba9de351a329b58f4867b73133c611cf1a7cf");
                     payMap.put("token",token);
                     String payResult = httpRequestClient.doPost("https://api.yrw.com/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
                     logger.info("支付订单返回结果:",result);
