@@ -20,7 +20,7 @@ public class HeartWeixinConfig {
     @Bean
     public Timer timer(final HeartWeixinToken heartWeixinToken){
         Timer timer=new Timer();
-        timer.schedule(heartWeixinToken, 0, 6 * 1000);
+        timer.schedule(heartWeixinToken, 0, 6000 * 1000);
         System.out.print("心跳运行");
         return timer;
     }
