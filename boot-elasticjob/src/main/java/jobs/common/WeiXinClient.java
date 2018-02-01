@@ -2,6 +2,7 @@ package jobs.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import jobs.config.WeiXinToken;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,25 +29,30 @@ public class WeiXinClient {
     private ThreadPoolTaskExecutor taskExecutor;
 
     public String getAccessToken(){
-        String accessToken = null;
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("grant_type", "client_credential");
-        params.put("appid", "wx05aaf675c8f7b3ed");
-        params.put("secret", "93187bebc44df53e567692d39173f0a3");
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("https://api.weixin.qq.com/cgi-bin/token");
-        stringBuilder.append("?grant_type=client_credential");
-        stringBuilder.append("&appid=wx05aaf675c8f7b3ed");
-        stringBuilder.append("&secret=93187bebc44df53e567692d39173f0a3");
-        try {
-            String retCode = httpRequestClient.doGet(stringBuilder.toString());
-            logger.info("token返回信息" + retCode);
-            Map<String, Object> tokenMap = JSON.parseObject(retCode, HashMap.class);
-            accessToken = tokenMap.get("access_token").toString();
-        } catch (Exception e) {
-            logger.error("获取token异常");
+        String token = WeiXinToken.getToken();
+        if (StringUtils.isEmpty(token)){
+            String accessToken = null;
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("grant_type", "client_credential");
+            params.put("appid", "wx05aaf675c8f7b3ed");
+            params.put("secret", "93187bebc44df53e567692d39173f0a3");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("https://api.weixin.qq.com/cgi-bin/token");
+            stringBuilder.append("?grant_type=client_credential");
+            stringBuilder.append("&appid=wx05aaf675c8f7b3ed");
+            stringBuilder.append("&secret=93187bebc44df53e567692d39173f0a3");
+            try {
+                String retCode = httpRequestClient.doGet(stringBuilder.toString());
+                logger.info("token返回信息" + retCode);
+                Map<String, Object> tokenMap = JSON.parseObject(retCode, HashMap.class);
+                accessToken = tokenMap.get("access_token").toString();
+            } catch (Exception e) {
+                logger.error("获取token异常");
+            }
+            WeiXinToken.setToken(accessToken);
+            return accessToken;
         }
-        return accessToken;
+        return token;
     }
 
     public void monitorTransferProject(String projectName, BigDecimal rate, BigDecimal availableBalance, String openid){

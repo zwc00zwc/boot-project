@@ -6,6 +6,7 @@ import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import jobs.common.HttpRequestClient;
 import jobs.common.WeiXinClient;
+import jobs.config.TransferProjectConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,17 +51,25 @@ public class MonitorTransferJob implements SimpleJob {
                     if (baseRate.compareTo(rate)<0){
                         //通知
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
+                        weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0mOgCPfwYCZQa_okJfBu-WA");
+
                         //自动投资
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ=="));
-                        Thread.sleep(500);
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"uCKSt/gCxvHr9wFa5zr4fA==","Jemr+UzSmwwpfD0MrTY9BQ=="));
-                        Thread.sleep(500);
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"xnHhsi+JeHazpo33o1H8qQ==","Jemr+UzSmwwpfD0MrTY9BQ=="));
-                        Thread.sleep(500);
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"41fSk/7Qd8D+z53vl18MQw==","sd0yJ/19TPQzlApYQVgXyA=="));
-                        Thread.sleep(500);
-                        taskExecutor.execute(new TransactionThread(ar,availableBalance,"fKWOXFwl+TcqqvRo+4I0Tg==","sd0yJ/19TPQzlApYQVgXyA=="));
-                        //taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+                        Map<String,String> map = TransferProjectConfig.getProjectConfigMap();
+                        if (map.containsKey("JXmufrTPbmzGaGTCld7DJA==")){
+                            if (!ar.get("id").equals(map.get("JXmufrTPbmzGaGTCld7DJA=="))){
+                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+                            }
+                        }else {
+                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+                        }
+
+                        if (map.containsKey("uuCBWAqOOTth3tbSiL2SlQ==")){
+                            if (!ar.get("id").equals(map.get("uuCBWAqOOTth3tbSiL2SlQ=="))){
+                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
+                            }
+                        }else {
+                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
+                        }
                     }
                 }
             }
@@ -107,10 +116,10 @@ public class MonitorTransferJob implements SimpleJob {
                 //计算账户余额
                 BigDecimal payBalance = null;
                 BigDecimal totalInvest = null;
-                for (int i = 9;i > 1;i--){
+                for (int i = 4;i > 1;i--){
                     double ratio = i*0.1;
                     payBalance = payBalance(ratio);
-                    if (payBalance.compareTo(new BigDecimal(2000))<=0){
+                    if (payBalance.compareTo(new BigDecimal(10000))<=0){
                         BigDecimal invest = availableBalance.multiply(new BigDecimal(ratio));
                         int a = invest.intValue()/1000 + 1;
                         int b = a*1000;
@@ -137,6 +146,11 @@ public class MonitorTransferJob implements SimpleJob {
                     payMap.put("token",token);
                     String payResult = httpRequestClient.doPost("https://api.yrw.com/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
                     logger.info("支付订单返回结果:",result);
+                    //支付
+                    JSONObject payResultJson = JSONObject.parseObject(result);
+                    if ((Boolean) payResultJson.get("success")){
+                        TransferProjectConfig.setProjectConfigMap(userName,ar.get("id")+"");
+                    }
                     System.out.print(payResult);
                 }
             } catch (Exception e) {

@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import jobs.common.HttpRequestClient;
 import jobs.common.WeiXinClient;
+import jobs.config.WeiXinToken;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import sign.RSA;
 
@@ -206,5 +208,12 @@ public class HomeController {
         String payResult = httpRequestClient.doPost("http://192.168.0.51:8082/security/transaction/pay/order/cashDesk",payMap,"1.7.0");
         System.out.print(payResult);
         return "index4";
+    }
+
+    @RequestMapping(value = "/index5")
+    @ResponseBody
+    public String index5(){
+        String token = WeiXinToken.getToken();
+        return token;
     }
 }
