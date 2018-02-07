@@ -16,6 +16,7 @@
         <module>boot-zhengjob</module>
         <module>boot-elasticjob</module>
         <module>boot-apidoc</module>
+        <module>boot-websocket</module>
     </modules>
 
     <properties>
@@ -79,6 +80,11 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${springboot.version}</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
             <dependency>
