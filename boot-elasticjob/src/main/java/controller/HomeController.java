@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by alan.zheng on 2017/11/20.
@@ -77,6 +78,207 @@ public class HomeController {
             });
         }
 //        return result;
+    }
+
+    @RequestMapping(value = "/renqizhi")
+    String renqizhi(){
+        final CountDownLatch latch = new CountDownLatch(5);
+
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","R6ZH8ev6Cp6yl4adhND3qRF2lPNyrAu2CL3MehlNrRwfujFz5TQTVWeFXQU5jrx7D9qURrcQwsqfYrjHoUhN2A==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","shPM2FFrUH1OLlTWvZSfb0O2SsaqYYXPzbdMgykkBVPrdMzb39Oeb2DqIkV0KLcXT9Uz9BdZ1a67yz7QcFwmKw==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","vlZPg0yXua7sT962SrOMvBlNMq0CVK4IBqQKl4tB2vkKiGIbD+RvPuI6n9W0A21auu/ABJW/lgaF5GuyhVNhhg==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","CTpBGYmczExOlwmPy3hx10MhW8AnjdWgkEVk8eO4OkB82WmOHD8UBjI4qOJCiib5D9pjCaUAiouLa9IMKJt/Xw==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","R6ZH8ev6Cp6yl4adhND3qRF2lPNyrAu2CL3MehlNrRwfujFz5TQTVWeFXQU5jrx7D9qURrcQwsqfYrjHoUhN2A==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+
+
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","JuucH4tihzD9OMJo2qbGGkyti8t2nMKPEo5j5WXHOa02oQjs66+bPcR1D1nK2bmojDXVtIz5WbKjJypx8gujwQ==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","+rmj21Q4zg5/ytu+68igfRBGo8ip93xdCC6gsyEGh/qPdCn9EZ89GD2WtDGHl/lKblE8/5t1LjbJ2vFStHRUWw==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","eBnYTpbe6MlMTIyGy3nPcfayd0EsZ9JaMV3rilEceSuoNn8RiGq4P+t6zAxEXnz2+ZbaKv4giwWdW2Ftn37AKA==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","vq6GSaVxnJhyvTZbBqVak8hzl3ynQbVvZGKJLDagkaAaowEYD6dqno/8zDf1RWDKjB61lX2p3oqFO5t6NuWvvw==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        new Thread(){
+            public void run(){
+                Map map = new HashMap();
+                map.put("invokeParameters",
+                        "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+                map.put("loginSource",2);
+                map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+                map.put("token","ZzdSPfWyroYD/KzkXFvBpv3rbhcpNt6U1k/hCMYl3i949Oc13x+a0cZufJ4FdhZFO80Gz1AI4BMKdLAtRzF0/Q==");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+            }
+        }.start();
+        try {
+            latch.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "执行完毕";
+    }
+
+    @RequestMapping(value = "/dantiao")
+    String dantiao(){
+        Map map = new HashMap();
+        map.put("invokeParameters",
+                "args_goodId_1_long_86&args_amount_1_integer_5&args_goodsCount_1_integer_1");
+        map.put("loginSource",2);
+        map.put("device","0a27a9962fe0f8ef107f85f0a13b37441c8a2904");
+        map.put("token","R6ZH8ev6Cp6yl4adhND3qRF2lPNyrAu2CL3MehlNrRwfujFz5TQTVWeFXQU5jrx7D9qURrcQwsqfYrjHoUhN2A==");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String result = httpRequestClient.doPost("http://192.168.0.51:8082/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+        return "success";
     }
 
     @RequestMapping(value = "/sign")

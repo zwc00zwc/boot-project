@@ -51,25 +51,25 @@ public class MonitorTransferJob implements SimpleJob {
                     if (baseRate.compareTo(rate)<0){
                         //通知
                         weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0oYFJyaV3qGprKHm6DSRHBA");
-                        weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0mOgCPfwYCZQa_okJfBu-WA");
+//                        weiXinClient.monitorTransferProject(ar.get("name")+"",rate,availableBalance,"oYzLx0mOgCPfwYCZQa_okJfBu-WA");
 
                         //自动投资
-                        Map<String,String> map = TransferProjectConfig.getProjectConfigMap();
-                        if (map.containsKey("JXmufrTPbmzGaGTCld7DJA==")){
-                            if (!ar.get("id").equals(map.get("JXmufrTPbmzGaGTCld7DJA=="))){
-                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
-                            }
-                        }else {
-                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
-                        }
-
-                        if (map.containsKey("uuCBWAqOOTth3tbSiL2SlQ==")){
-                            if (!ar.get("id").equals(map.get("uuCBWAqOOTth3tbSiL2SlQ=="))){
-                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
-                            }
-                        }else {
-                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
-                        }
+//                        Map<String,String> map = TransferProjectConfig.getProjectConfigMap();
+//                        if (map.containsKey("JXmufrTPbmzGaGTCld7DJA==")){
+//                            if (!ar.get("id").equals(map.get("JXmufrTPbmzGaGTCld7DJA=="))){
+//                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+//                            }
+//                        }else {
+//                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA=="));
+//                        }
+//
+//                        if (map.containsKey("uuCBWAqOOTth3tbSiL2SlQ==")){
+//                            if (!ar.get("id").equals(map.get("uuCBWAqOOTth3tbSiL2SlQ=="))){
+//                                taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
+//                            }
+//                        }else {
+//                            taskExecutor.execute(new TransactionThread(ar,availableBalance,"uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A=="));
+//                        }
                     }
                 }
             }
