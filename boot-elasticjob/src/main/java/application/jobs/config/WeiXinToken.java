@@ -1,4 +1,4 @@
-package jobs.config;
+package application.jobs.config;
 
 /**
  * Created by alan.zheng on 2018/2/1.

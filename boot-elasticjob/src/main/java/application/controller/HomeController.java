@@ -1,10 +1,10 @@
-package controller;
+package application.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import jobs.common.HttpRequestClient;
-import jobs.common.WeiXinClient;
-import jobs.config.WeiXinToken;
+import application.jobs.common.HttpRequestClient;
+import application.jobs.common.WeiXinClient;
+import application.jobs.config.WeiXinToken;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

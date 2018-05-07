@@ -1,4 +1,4 @@
-package jobs.config;
+package application.jobs.config;
 
 import java.util.Map;
 

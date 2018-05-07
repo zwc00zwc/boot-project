@@ -1,4 +1,4 @@
-package jobs.common;
+package application.jobs.common;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;

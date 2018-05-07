@@ -1,12 +1,12 @@
-package jobs;
+package application.jobs;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import jobs.common.HttpRequestClient;
-import jobs.common.WeiXinClient;
-import jobs.config.TransferProjectConfig;
+import application.jobs.common.HttpRequestClient;
+import application.jobs.common.WeiXinClient;
+import application.jobs.config.TransferProjectConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

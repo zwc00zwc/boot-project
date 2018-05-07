@@ -1,4 +1,4 @@
-package jobs.config;
+package application.jobs.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

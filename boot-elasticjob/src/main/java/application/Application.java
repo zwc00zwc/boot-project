@@ -1,13 +1,5 @@
-import com.dangdang.ddframe.job.config.JobCoreConfiguration;
-import com.dangdang.ddframe.job.config.dataflow.DataflowJobConfiguration;
-import com.dangdang.ddframe.job.config.simple.SimpleJobConfiguration;
-import com.dangdang.ddframe.job.lite.api.JobScheduler;
-import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
-import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
-import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
-import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
-import jobs.DataTestJob;
-import jobs.TestJob;
+package application;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Created by alan.zheng on 2017/4/18.
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "core.domain,jobs,controller")
+@ComponentScan(basePackages = "core.domain,application.jobs,application.controller")
 public class Application {
     public static void main(String[] args){
         SpringApplication.run(Application.class);

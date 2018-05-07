@@ -1,14 +1,11 @@
-package jobs.config;
+package application.jobs.config;
 
 import com.alibaba.fastjson.JSON;
-import jobs.common.HttpRequestClient;
-import jobs.common.WeiXinClient;
+import application.jobs.common.HttpRequestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;

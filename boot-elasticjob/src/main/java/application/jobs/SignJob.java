@@ -1,10 +1,9 @@
-package jobs;
+package application.jobs;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import jobs.common.HttpRequestClient;
-import org.apache.http.client.methods.HttpPost;
+import application.jobs.common.HttpRequestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

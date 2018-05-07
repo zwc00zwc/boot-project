@@ -1,11 +1,9 @@
-package jobs.config;
+package application.jobs.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by alan.zheng on 2018/2/1.
