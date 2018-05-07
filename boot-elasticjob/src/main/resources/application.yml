@@ -21,7 +21,7 @@ dataflowJob:
 #签到
 signJob:
   id: signJob
-  cron: 0 0 1 * * ?
+  cron: 0 0 9 * * ?
   shardingTotalCount: 1
   description: 签到
 

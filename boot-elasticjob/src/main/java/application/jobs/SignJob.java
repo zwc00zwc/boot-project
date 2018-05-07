@@ -65,7 +65,7 @@ public class SignJob implements SimpleJob {
 
         try {
             //13588712642
-            token = getToken("uuCBWAqOOTth3tbSiL2SlQ==","0wuzscz5gMK9rDfoRhcx2A==");
+            token = getToken("uuCBWAqOOTth3tbSiL2SlQ==","lVPgco7cWAvlj3/vjIFkGw==");
         } catch (Exception e) {
             logger.error("token获取失败uuCBWAqOOTth3tbSiL2SlQ==",e);
         }
@@ -104,7 +104,7 @@ public class SignJob implements SimpleJob {
     private void exchange(String token){
         Map map = new HashMap();
         map.put("invokeParameters",
-                "args_goodId_1_long_55&args_amount_45_integer_174&args_goodsCount_1_integer_1");
+                "args_goodId_1_long_55&args_amount_1_integer_45&args_goodsCount_1_integer_1");
         map.put("loginSource",2);
         map.put("device","4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
         map.put("token",token);
