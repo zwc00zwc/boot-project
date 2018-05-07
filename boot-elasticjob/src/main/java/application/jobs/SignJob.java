@@ -111,18 +111,18 @@ public class SignJob implements SimpleJob {
         String result = httpRequestClient.doPost("https://api.yrw.com/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
     }
 
-    public static void main(String[] args){
-        //控制随机事件 (1小时内)
-        Random random = new Random();
-        //获取千位数
-        Integer q = random.nextInt(3);
-        //获取百位数
-        Integer b = random.nextInt(10);
-        //获取十位数
-        Integer s = random.nextInt(10);
-        //获取个位数
-        Integer g = random.nextInt(10);
-        Integer total = q * 1000 + b * 100 + s * 10 + g;
-        System.out.print("当前随机秒数:" + total);
-    }
+//    public static void main(String[] args){
+//        //控制随机事件 (1小时内)
+//        Random random = new Random();
+//        //获取千位数
+//        Integer q = random.nextInt(3);
+//        //获取百位数
+//        Integer b = random.nextInt(10);
+//        //获取十位数
+//        Integer s = random.nextInt(10);
+//        //获取个位数
+//        Integer g = random.nextInt(10);
+//        Integer total = q * 1000 + b * 100 + s * 10 + g;
+//        System.out.print("当前随机秒数:" + total);
+//    }
 }
