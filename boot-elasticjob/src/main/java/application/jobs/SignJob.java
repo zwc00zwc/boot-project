@@ -32,48 +32,35 @@ public class SignJob implements SimpleJob {
         //获取个位数
         Integer g = random.nextInt(10);
         Integer total = q * 1000 + b * 100 + s * 10 + g;
+        logger.info("随机到点数:"+total);
         try {
             Thread.sleep(total*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String token = null;
-        Map map = null;
         try {
             //13059758695
-            token = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==");
+            String jxToken = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==");
+            sign(jxToken,"8905da6cb8ded9bf57977e7710a4d279df18476d");
         } catch (Exception e) {
-            logger.error("token获取失败JXmufrTPbmzGaGTCld7DJA==",e);
-        }
-        try {
-            sign(token,"8905da6cb8ded9bf57977e7710a4d279df18476d");
-        } catch (Exception e) {
-            logger.error("签到失败",e);
+            logger.error("token获取失败JXmufrTPbmzGaGTCld7DJA==,签到异常",e);
         }
 
         try {
             //13575658971
-            token = getToken("oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ==");
+            String ofToken = getToken("oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ==");
+            sign(ofToken,"noDevice");
         } catch (Exception e) {
-            logger.error("token获取失败oF9X7mGq+0HedeuvGrGOyw==",e);
-        }
-        try {
-            sign(token,"noDevice");
-        } catch (Exception e) {
-            logger.error("签到失败",e);
+            logger.error("token获取失败oF9X7mGq+0HedeuvGrGOyw==,签到异常",e);
         }
 
         try {
             //13588712642
-            token = getToken("uuCBWAqOOTth3tbSiL2SlQ==","lVPgco7cWAvlj3/vjIFkGw==");
+            String uuToken = getToken("uuCBWAqOOTth3tbSiL2SlQ==","lVPgco7cWAvlj3/vjIFkGw==");
+            sign(uuToken,"4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
+            exchange(uuToken);
         } catch (Exception e) {
-            logger.error("token获取失败uuCBWAqOOTth3tbSiL2SlQ==",e);
-        }
-        try {
-            sign(token,"4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
-            exchange(token);
-        } catch (Exception e) {
-            logger.error("签到失败",e);
+            logger.error("token获取失败uuCBWAqOOTth3tbSiL2SlQ==，签到失败",e);
         }
     }
 
@@ -82,6 +69,7 @@ public class SignJob implements SimpleJob {
         map.put("device",device);
         map.put("token",token);
         String result = httpRequestClient.doPost("https://api.yrw.com/security/member/goSignIn",map,"1.0.0");
+        logger.info(device+"签到返回信息"+result);
     }
 
     private String getToken(String username,String password){
@@ -109,6 +97,7 @@ public class SignJob implements SimpleJob {
         map.put("device","4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
         map.put("token",token);
         String result = httpRequestClient.doPost("https://api.yrw.com/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
+        logger.info("兑换结果返回信息" + result);
     }
 
 //    public static void main(String[] args){
