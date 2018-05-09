@@ -40,7 +40,7 @@ public class SignJob implements SimpleJob {
         }
         try {
             //13059758695
-            String jxToken = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==");
+            String jxToken = getToken("JXmufrTPbmzGaGTCld7DJA==","HnxrxgodkpzHI1SS5GUWiA==","8905da6cb8ded9bf57977e7710a4d279df18476d");
             sign(jxToken,"8905da6cb8ded9bf57977e7710a4d279df18476d");
         } catch (Exception e) {
             logger.error("token获取失败JXmufrTPbmzGaGTCld7DJA==,签到异常",e);
@@ -48,17 +48,17 @@ public class SignJob implements SimpleJob {
 
         try {
             //13575658971
-            String ofToken = getToken("oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ==");
-            sign(ofToken,"noDevice");
+            String ofToken = getToken("oF9X7mGq+0HedeuvGrGOyw==","Jemr+UzSmwwpfD0MrTY9BQ==","f38bff628f390fb81d32c545e4c7c660a8b9b4d7");
+            sign(ofToken,"f38bff628f390fb81d32c545e4c7c660a8b9b4d7");
         } catch (Exception e) {
             logger.error("token获取失败oF9X7mGq+0HedeuvGrGOyw==,签到异常",e);
         }
 
         try {
             //13588712642
-            String uuToken = getToken("uuCBWAqOOTth3tbSiL2SlQ==","lVPgco7cWAvlj3/vjIFkGw==");
+            String uuToken = getToken("uuCBWAqOOTth3tbSiL2SlQ==","lVPgco7cWAvlj3/vjIFkGw==","4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
             sign(uuToken,"4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
-            exchange(uuToken);
+            exchange(uuToken,"4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
         } catch (Exception e) {
             logger.error("token获取失败uuCBWAqOOTth3tbSiL2SlQ==，签到失败",e);
         }
@@ -69,15 +69,15 @@ public class SignJob implements SimpleJob {
         map.put("device",device);
         map.put("token",token);
         String result = httpRequestClient.doPost("https://api.yrw.com/security/member/goSignIn",map,"1.0.0");
-        logger.info(device+"签到返回信息"+result);
+        logger.info("device:"+device+"token:"+token+"签到返回信息"+result);
     }
 
-    private String getToken(String username,String password){
+    private String getToken(String username,String password,String device){
         Map map = new HashMap();
         map.put("username",username);
         map.put("password",password);
         map.put("loginSource","2");
-        map.put("device","8905da6cb8ded9bf57977e7710a4d279df18476d");
+        map.put("device",device);
         map.put("equipment","iPhone");
         String response = httpRequestClient.doPost("https://api.yrw.com/logining",map,"1.0.0");
         JSONObject jsonObject = JSONObject.parseObject(response);
@@ -89,12 +89,12 @@ public class SignJob implements SimpleJob {
      * 兑换优惠券
      * @param token
      */
-    private void exchange(String token){
+    private void exchange(String token,String device){
         Map map = new HashMap();
         map.put("invokeParameters",
                 "args_goodId_1_long_55&args_amount_1_integer_45&args_goodsCount_1_integer_1");
         map.put("loginSource",2);
-        map.put("device","4fbb14f0f2b5aae5c11eec2deeeebd7d2e33fcf0");
+        map.put("device",device);
         map.put("token",token);
         String result = httpRequestClient.doPost("https://api.yrw.com/security/find/dynamicInvoke?invokeMethod=3",map,"1.0.0");
         logger.info("兑换结果返回信息" + result);
