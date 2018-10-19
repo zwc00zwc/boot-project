@@ -2,11 +2,9 @@ package application.jobs;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
-import core.domain.model.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,9 +27,9 @@ public class DataTestJob implements DataflowJob {
         logger.info("分片【"+shardingContext.getShardingItem()+"】开始执行");
         if (list!=null&&list.size()>0){
             for (Object l:list) {
-                Member m = (Member) l;
-                logger.info("分片【"+shardingContext.getShardingItem()+"】执行" + m.getUserName()+new Date());
-                System.out.print(m.getUserName()+new Date());
+//                Member m = (Member) l;
+//                logger.info("分片【"+shardingContext.getShardingItem()+"】执行" + m.getUserName()+new Date());
+//                System.out.print(m.getUserName()+new Date());
             }
         }
     }

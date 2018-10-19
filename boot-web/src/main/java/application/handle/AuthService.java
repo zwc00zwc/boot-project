@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class AuthService {
-    @Pointcut("@annotation(annotation.Auth)")
+    @Pointcut("@annotation(application.annotation.Auth)")
     public void methodPointcut(){
 
     }
