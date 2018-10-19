@@ -2,3 +2,13 @@
 /*.iml
 /boot-second/target
 /boot-second/*.iml
+/boot-deploy/*.iml
+/boot-zhengjob/*.iml
+/boot-websocket/*.iml
+/boot-web/target
+/boot-web/*.iml
+/boot-elasticjob/target
+/boot-elasticjob/*.iml
+/boot-common/target
+/boot-common/*.iml
+/boot-apidoc/*.iml
