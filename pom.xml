@@ -14,7 +14,6 @@
         <module>boot-zhengjob</module>
         <module>boot-elasticjob</module>
         <module>boot-apidoc</module>
-        <module>boot-websocket</module>
         <module>boot-deploy</module>
     </modules>
 
