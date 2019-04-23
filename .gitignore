@@ -12,3 +12,6 @@
 /boot-common/target
 /boot-common/*.iml
 /boot-apidoc/*.iml
+boot-sofa.iml
+sofa-client.iml
+sofa-server.iml
