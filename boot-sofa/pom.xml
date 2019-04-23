@@ -19,10 +19,11 @@
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/com.alipay.sofa/sofa-rpc-all -->
+            <!-- https://mvnrepository.com/artifact/com.alipay.sofa/rpc-sofa-boot-starter -->
             <dependency>
                 <groupId>com.alipay.sofa</groupId>
-                <artifactId>sofa-rpc-all</artifactId>
-                <version>5.5.2</version>
+                <artifactId>rpc-sofa-boot-starter</artifactId>
+                <version>6.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

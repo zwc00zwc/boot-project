@@ -38,7 +38,7 @@
         <!-- https://mvnrepository.com/artifact/com.alipay.sofa/sofa-rpc-all -->
         <dependency>
             <groupId>com.alipay.sofa</groupId>
-            <artifactId>sofa-rpc-all</artifactId>
+            <artifactId>rpc-sofa-boot-starter</artifactId>
         </dependency>
 
     </dependencies>
