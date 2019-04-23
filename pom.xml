@@ -15,6 +15,7 @@
         <module>boot-elasticjob</module>
         <module>boot-apidoc</module>
         <module>boot-deploy</module>
+        <module>boot-sofa</module>
     </modules>
 
     <properties>
